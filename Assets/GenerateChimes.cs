@@ -5,15 +5,19 @@ using UnityEditor;
 
 public class GenerateChimes : MonoBehaviour {
 
-    public GameObject leftmostCylinder;
+    public GameObject chimes;
 
-    List<GameObject> cylinders = new List<GameObject>();
+    //List<GameObject> cylinders = new List<GameObject>();
+    float[] chimeLengths = new float[18] { 38f, 39f, 41.5f, 44f, 45.5f, 48.5f, 51.5f, 54.5f, 56f, 59.5f, 63f, 40f, 43f, 46.5f, 49.5f, 52.5f, 57.5f, 61f};
 
 	// Use this for initialization
 	void Start () {
-        cylinders.Add(leftmostCylinder);
+        //convert chime lengths from inches to meters
+        for (int i = 0; i < 18; i++){
+            chimeLengths[i] = chimeLengths[i] * 0.0254f;
+        }
 
-        MakeCylinders();
+        PositionCylinders();
         SaveCylinders();
 	}
 	
@@ -22,31 +26,19 @@ public class GenerateChimes : MonoBehaviour {
 		
 	}
 
-    public void MakeCylinders()
+    public void PositionCylinders()
     {
-        for (int i = 1; i <= 18; i++)
-        {
-            GameObject newCylinder = ObjectFactory.CreateGameObject("cylinder" + i.ToString());
-
-            cylinders.Add(newCylinder);
+        //for(int i = 0; i < 18; i++){
+        //    cylinders[i].transform.localScale = new Vector3(0.0254f, chimeLengths[i], 0.0254f);
+        //}
+        int chimeCount = 0;
+        foreach( Transform cylinder in chimes.transform){
+            cylinder.transform.localScale = new Vector3(0.0254f, chimeLengths[chimeCount], 0.0254f);
+            chimeCount++;
         }
 
     }
 
-    public void copyMesh()
-    {
-        Mesh copyingMesh = leftmostCylinder.GetComponent<MeshFilter>().mesh;
-        for (int i = 1; i <= 18; i++)
-        {
-            cylinders[i].AddComponent<MeshFilter>();
-            cylinders[i].GetComponent<MeshFilter>().mesh.vertices = copyingMesh.vertices;
-            cylinders[i].GetComponent<MeshFilter>().mesh.triangles = copyingMesh.triangles;
-            cylinders[i].GetComponent<MeshFilter>().mesh.uv = copyingMesh.uv;
-            cylinders[i].GetComponent<MeshFilter>().mesh.normals = copyingMesh.normals;
-            cylinders[i].GetComponent<MeshFilter>().mesh.colors = copyingMesh.colors;
-            cylinders[i].GetComponent<MeshFilter>().mesh.tangents = copyingMesh.tangents;
-        }
-    }
 
     public void SaveCylinders()
     {
