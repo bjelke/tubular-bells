@@ -20,9 +20,11 @@ public class BellCollider : MonoBehaviour {
 
         // if a controller has collided with a chime, play the appropriate sound
 
+        Debug.Log("COLLISION!");
+
         if (other.gameObject.layer == LayerMask.NameToLayer("ControllerLayer"))
         {
-            this.gameObject.GetComponent<Renderer>().material.color = new Color(0, 0, 200);
+            this.gameObject.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 200);
             Debug.Log("inside method");
         }
     }

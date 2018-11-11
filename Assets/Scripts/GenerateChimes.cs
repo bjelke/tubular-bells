@@ -18,7 +18,16 @@ public class GenerateChimes : MonoBehaviour {
             cylinder.transform.parent = chimes.transform;
             chimeLengths[i] = chimeLengths[i] / 39.7301f *2 / 3;
 
+            cylinder.AddComponent<Rigidbody>();
+            cylinder.AddComponent<CapsuleCollider>();
             cylinder.AddComponent<BellCollider>();
+
+            cylinder.gameObject.GetComponent<CapsuleCollider>().transform.localScale = cylinder.gameObject.transform.localScale;
+            cylinder.gameObject.GetComponent<CapsuleCollider>().transform.localPosition = cylinder.gameObject.transform.localPosition;
+            cylinder.gameObject.GetComponent<CapsuleCollider>().isTrigger = true;
+
+            cylinder.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+            cylinder.gameObject.GetComponent<Rigidbody>().useGravity = false;
         }
 
         PositionCylinders();
