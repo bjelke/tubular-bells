@@ -30,6 +30,7 @@ public class GenerateChimes : MonoBehaviour {
             cylinder.gameObject.GetComponent<Rigidbody>().useGravity = false;
         }
 
+       // GameObject.CreatePrimitive(PrimitiveType.Plane).transform.localPosition = new Vector3(0, 2f, 0);
         PositionCylinders();
         SaveCylinders();
 	}
@@ -47,7 +48,21 @@ public class GenerateChimes : MonoBehaviour {
         int chimeCount = 0;
         foreach( Transform cylinder in chimes.transform){
             cylinder.transform.localScale = new Vector3(0.0554f, chimeLengths[chimeCount], 0.0554f); //0.0254f
-            cylinder.transform.localPosition = new Vector3(0 + chimeCount*0.1f, 1.5f - chimeLengths[chimeCount]/2, 0);
+            if (chimeCount < 11)
+            {
+                cylinder.transform.localPosition = new Vector3(0 + chimeCount * 0.3f, 2f - chimeLengths[chimeCount], 0);
+            }
+            else if (chimeCount >= 16)
+            {
+                cylinder.transform.localPosition = new Vector3(0.15f + (chimeCount - 9) * 0.3f, 2.1f - chimeLengths[chimeCount], 0);
+            } else if (chimeCount >= 13)
+            {
+                cylinder.transform.localPosition = new Vector3(0.15f + (chimeCount - 10) * 0.3f, 2.1f - chimeLengths[chimeCount], 0);
+            }
+            else
+            {
+                cylinder.transform.localPosition = new Vector3(0.15f + (chimeCount-11) * 0.3f, 2.1f - chimeLengths[chimeCount], 0);
+            }
             chimeCount++;
         }
 
