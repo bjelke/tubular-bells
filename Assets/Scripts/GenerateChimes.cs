@@ -16,11 +16,17 @@ public class GenerateChimes : MonoBehaviour {
         for (int i = 0; i < 18; i++){
             GameObject cylinder = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
             cylinder.transform.parent = chimes.transform;
-            chimeLengths[i] = chimeLengths[i] / 39.7301f *2 / 3;
+            chimeLengths[i] = chimeLengths[i] / 39.7301f *2 / 4;
 
             cylinder.AddComponent<Rigidbody>();
             cylinder.AddComponent<CapsuleCollider>();
             cylinder.AddComponent<BellCollider>();
+            cylinder.AddComponent<AudioSource>();
+
+            AudioClip noteG = Resources.Load<AudioClip>("noteG");
+            cylinder.gameObject.GetComponent<AudioSource>().clip = noteG;
+            //cylinder.gameObject.GetComponent<AudioSource>().PlayOneShot(noteG, 0.6f);
+
 
             cylinder.gameObject.GetComponent<CapsuleCollider>().transform.localScale = cylinder.gameObject.transform.localScale;
             cylinder.gameObject.GetComponent<CapsuleCollider>().transform.localPosition = cylinder.gameObject.transform.localPosition;
@@ -47,21 +53,21 @@ public class GenerateChimes : MonoBehaviour {
         //}
         int chimeCount = 0;
         foreach( Transform cylinder in chimes.transform){
-            cylinder.transform.localScale = new Vector3(0.0554f, chimeLengths[chimeCount], 0.0554f); //0.0254f
+            cylinder.transform.localScale = new Vector3(0.0354f, chimeLengths[chimeCount], 0.0354f); //0.0554f -> these are the x & z terms for the width of the chimes
             if (chimeCount < 11)
             {
-                cylinder.transform.localPosition = new Vector3(0 + chimeCount * 0.3f, 2f - chimeLengths[chimeCount], 0);
+                cylinder.transform.localPosition = new Vector3(0 + chimeCount * 0.2f, 2f - chimeLengths[chimeCount], 0);
             }
             else if (chimeCount >= 16)
             {
-                cylinder.transform.localPosition = new Vector3(0.15f + (chimeCount - 9) * 0.3f, 2.1f - chimeLengths[chimeCount], 0);
+                cylinder.transform.localPosition = new Vector3(0.1f + (chimeCount - 9) * 0.2f, 2.1f - chimeLengths[chimeCount], 0);
             } else if (chimeCount >= 13)
             {
-                cylinder.transform.localPosition = new Vector3(0.15f + (chimeCount - 10) * 0.3f, 2.1f - chimeLengths[chimeCount], 0);
+                cylinder.transform.localPosition = new Vector3(0.1f + (chimeCount - 10) * 0.2f, 2.1f - chimeLengths[chimeCount], 0);
             }
             else
             {
-                cylinder.transform.localPosition = new Vector3(0.15f + (chimeCount-11) * 0.3f, 2.1f - chimeLengths[chimeCount], 0);
+                cylinder.transform.localPosition = new Vector3(0.1f + (chimeCount-11) * 0.2f, 2.1f - chimeLengths[chimeCount], 0);
             }
             chimeCount++;
         }
