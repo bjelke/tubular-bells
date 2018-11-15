@@ -9,6 +9,7 @@ public class GenerateChimes : MonoBehaviour {
 
     //List<GameObject> cylinders = new List<GameObject>();
     float[] chimeLengths = new float[18] { 38f, 39f, 41.5f, 44f, 45.5f, 48.5f, 51.5f, 54.5f, 56f, 59.5f, 63f, 40f, 43f, 46.5f, 49.5f, 52.5f, 57.5f, 61f};
+    string[] soundFileNames = {"0F", "1E", "2D", "3C", "4B", "5A", "6G", "7lowF", "8lowE", "9lowD", "10lowC", "11Eflat", "12Csharp", "13Bflat", "14Aflat", "15Fsharp", "16lowEflat", "17lowCsharp"};
 
 	// Use this for initialization
 	void Start () {
@@ -23,8 +24,8 @@ public class GenerateChimes : MonoBehaviour {
             cylinder.AddComponent<BellCollider>();
             cylinder.AddComponent<AudioSource>();
 
-            AudioClip noteG = Resources.Load<AudioClip>("noteG");
-            cylinder.gameObject.GetComponent<AudioSource>().clip = noteG;
+            AudioClip note = Resources.Load<AudioClip>("ChimeNotes/spaceHarpsicord/"+soundFileNames[i]);
+            cylinder.gameObject.GetComponent<AudioSource>().clip = note;
             //cylinder.gameObject.GetComponent<AudioSource>().PlayOneShot(noteG, 0.6f);
 
 
@@ -60,14 +61,17 @@ public class GenerateChimes : MonoBehaviour {
             }
             else if (chimeCount >= 16)
             {
-                cylinder.transform.localPosition = new Vector3(0.1f + (chimeCount - 9) * 0.2f, 2.1f - chimeLengths[chimeCount], 0);
+                cylinder.transform.localPosition = new Vector3(0.1f + (chimeCount - 8) * 0.2f, 2.1f - chimeLengths[chimeCount], 0);
+                cylinder.gameObject.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 200);
             } else if (chimeCount >= 13)
             {
-                cylinder.transform.localPosition = new Vector3(0.1f + (chimeCount - 10) * 0.2f, 2.1f - chimeLengths[chimeCount], 0);
+                cylinder.transform.localPosition = new Vector3(0.1f + (chimeCount - 9) * 0.2f, 2.1f - chimeLengths[chimeCount], 0);
+                cylinder.gameObject.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 200);
             }
             else
             {
-                cylinder.transform.localPosition = new Vector3(0.1f + (chimeCount-11) * 0.2f, 2.1f - chimeLengths[chimeCount], 0);
+                cylinder.transform.localPosition = new Vector3(0.1f + (chimeCount-10) * 0.2f, 2.1f - chimeLengths[chimeCount], 0);
+                cylinder.gameObject.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 200);
             }
             chimeCount++;
         }

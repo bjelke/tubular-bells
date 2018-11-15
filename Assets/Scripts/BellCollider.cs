@@ -24,7 +24,7 @@ public class BellCollider : MonoBehaviour {
 
         if (other.gameObject.layer == LayerMask.NameToLayer("ControllerLayer"))
         {
-            this.gameObject.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 200);
+            //this.gameObject.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 200);
             this.gameObject.GetComponent<AudioSource>().Play();
             Debug.Log("inside method");
         }
