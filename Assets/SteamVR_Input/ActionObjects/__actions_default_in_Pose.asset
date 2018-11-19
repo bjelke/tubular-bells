@@ -14,4 +14,4 @@ MonoBehaviour:
   changeTolerance: 0.000001
   fullPath: /actions/default/in/Pose
   actionSet: {fileID: 11400000, guid: c7bc678b69205474f8e4b68701bb347e, type: 2}
-  direction: 0
+  direction: 1
