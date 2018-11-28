@@ -43,7 +43,6 @@ public class GenerateChimes : MonoBehaviour {
 
        // GameObject.CreatePrimitive(PrimitiveType.Plane).transform.localPosition = new Vector3(0, 2f, 0);
         PositionCylinders();
-        SaveCylinders();
 	}
 	
 	// Update is called once per frame
@@ -57,10 +56,16 @@ public class GenerateChimes : MonoBehaviour {
         //    cylinders[i].transform.localScale = new Vector3(0.0254f, chimeLengths[i], 0.0254f);
         //}
         int chimeCount = 0;
-        foreach( Transform cylinder in chimes.transform){
+        foreach (Transform cylinder in chimes.transform) {
             cylinder.transform.localScale = new Vector3(0.0354f, chimeLengths[chimeCount], 0.0354f); //0.0554f -> these are the x & z terms for the width of the chimes
 
-            cylinder.transform.localPosition = new Vector3(0.75f * Mathf.Cos(0.1954f*chimeCount), chimeHeight[chimeCount] - chimeLengths[chimeCount], 0.75f * Mathf.Sin(0.1954f*chimeCount));
+            cylinder.transform.localPosition = new Vector3(0.75f * Mathf.Cos(0.1954f * chimeCount), chimeHeight[chimeCount] - chimeLengths[chimeCount], 0.75f * Mathf.Sin(0.1954f * chimeCount));
+
+            int[] flats = { 2, 4, 7, 9, 11, 14, 16 };
+            ArrayList sharps = new ArrayList(flats);
+            if (sharps.Contains(chimeCount)){
+                cylinder.gameObject.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 200);
+            }
             
             //if (chimeCount < 11)
             //{
@@ -85,10 +90,5 @@ public class GenerateChimes : MonoBehaviour {
 
     }
 
-
-    public void SaveCylinders()
-    {
-
-    }
 
 }

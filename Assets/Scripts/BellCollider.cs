@@ -30,7 +30,12 @@ public class BellCollider : MonoBehaviour {
         {
             //this.gameObject.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 200);
             this.gameObject.GetComponent<AudioSource>().Play();
-            SteamVR_Input.__actions_default_out_Haptic.Execute(0,0.7f,50,0.5f,SteamVR_Input_Sources.Any); //delay Sec, Duration sec, freq 1-320 Hz, amplitude 0-1, Input Source
+            if (other.gameObject.name.Equals("RightCube")){ // right hand
+                SteamVR_Input.__actions_default_out_Haptic.Execute(0, 0.7f, 50, 0.5f, SteamVR_Input_Sources.RightHand);
+            }
+            else { // left hand ("LeftCube")
+                SteamVR_Input.__actions_default_out_Haptic.Execute(0, 0.7f, 50, 0.5f, SteamVR_Input_Sources.LeftHand); //delay Sec, Duration sec, freq 1-320 Hz, amplitude 0-1, Input Source
+            }
         }
     }
 }
