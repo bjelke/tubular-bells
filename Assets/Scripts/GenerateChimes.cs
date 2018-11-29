@@ -33,7 +33,6 @@ public class GenerateChimes : MonoBehaviour {
             AudioClip note = Resources.Load<AudioClip>("ChimeNotes/spaceHarpsicord/"+soundFileNames[i]);
             cylinder.gameObject.GetComponent<AudioSource>().clip = note;
             cylinder.gameObject.GetComponent<AudioSource>().outputAudioMixerGroup = mixer.FindMatchingGroups("Master")[0];
-            Debug.Log(cylinder.gameObject.GetComponent<AudioSource>().outputAudioMixerGroup);
 
 
             cylinder.gameObject.GetComponent<CapsuleCollider>().transform.localScale = cylinder.gameObject.transform.localScale;

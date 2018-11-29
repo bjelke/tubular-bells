@@ -8,10 +8,13 @@ public class BellCollider : MonoBehaviour {
     //private SteamVR_Controller.Device rightHand;
     //private SteamVR_Controller.Device leftHand;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    UnityEngine.Audio.AudioMixer mixer; 
+
+    // Use this for initialization
+    void Start () {
+
+        mixer = Resources.Load("MasterMixer") as UnityEngine.Audio.AudioMixer;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -20,7 +23,6 @@ public class BellCollider : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        //TODO: put controllers on their own layer, then check if other.gameObject.layer is that layer
 
         // if a controller has collided with a chime, play the appropriate sound
 
@@ -29,7 +31,14 @@ public class BellCollider : MonoBehaviour {
         if (other.gameObject.layer == LayerMask.NameToLayer("ControllerLayer"))
         {
             //this.gameObject.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 200);
+
+            //UnityEngine.Audio.AudioMixerGroup master = mixer.FindMatchingGroups("Master")[0];
+
+            //this.gameObject.GetComponent<AudioSource>().volume = Mathf.Clamp01(other.gameObject.GetComponent<Rigidbody>().velocity.magnitude);
+            Debug.Log(other.gameObject.GetComponent<Rigidbody>().angularVelocity);
             this.gameObject.GetComponent<AudioSource>().Play();
+
+
             if (other.gameObject.name.Equals("RightCube")){ // right hand
                 SteamVR_Input.__actions_default_out_Haptic.Execute(0, 0.7f, 50, 0.5f, SteamVR_Input_Sources.RightHand);
                 Debug.Log("collide RIGHT");
