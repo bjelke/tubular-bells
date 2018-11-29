@@ -15,7 +15,9 @@ public class GenerateChimes : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
+        UnityEngine.Audio.AudioMixer mixer = Resources.Load("MasterMixer") as UnityEngine.Audio.AudioMixer;
 
+        //Debug.Log(mixer.name);
 
         //convert chime lengths from inches to meters & create cylinder primitives.
         for (int i = 0; i < 18; i++){
@@ -30,7 +32,8 @@ public class GenerateChimes : MonoBehaviour {
 
             AudioClip note = Resources.Load<AudioClip>("ChimeNotes/spaceHarpsicord/"+soundFileNames[i]);
             cylinder.gameObject.GetComponent<AudioSource>().clip = note;
-            //cylinder.gameObject.GetComponent<AudioSource>().PlayOneShot(noteG, 0.6f);
+            cylinder.gameObject.GetComponent<AudioSource>().outputAudioMixerGroup = mixer.FindMatchingGroups("Master")[0];
+            Debug.Log(cylinder.gameObject.GetComponent<AudioSource>().outputAudioMixerGroup);
 
 
             cylinder.gameObject.GetComponent<CapsuleCollider>().transform.localScale = cylinder.gameObject.transform.localScale;

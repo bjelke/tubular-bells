@@ -24,7 +24,7 @@ public class BellCollider : MonoBehaviour {
 
         // if a controller has collided with a chime, play the appropriate sound
 
-        Debug.Log("COLLISION!");
+        //Debug.Log("COLLISION!");
 
         if (other.gameObject.layer == LayerMask.NameToLayer("ControllerLayer"))
         {
@@ -32,9 +32,11 @@ public class BellCollider : MonoBehaviour {
             this.gameObject.GetComponent<AudioSource>().Play();
             if (other.gameObject.name.Equals("RightCube")){ // right hand
                 SteamVR_Input.__actions_default_out_Haptic.Execute(0, 0.7f, 50, 0.5f, SteamVR_Input_Sources.RightHand);
+                Debug.Log("collide RIGHT");
             }
             else { // left hand ("LeftCube")
                 SteamVR_Input.__actions_default_out_Haptic.Execute(0, 0.7f, 50, 0.5f, SteamVR_Input_Sources.LeftHand); //delay Sec, Duration sec, freq 1-320 Hz, amplitude 0-1, Input Source
+                Debug.Log("LEFT collide");
             }
         }
     }
