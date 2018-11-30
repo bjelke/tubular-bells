@@ -36,16 +36,18 @@ public class BellCollider : MonoBehaviour {
 
             //this.gameObject.GetComponent<AudioSource>().volume = Mathf.Clamp01(other.gameObject.GetComponent<Rigidbody>().velocity.magnitude);
             Debug.Log(other.gameObject.GetComponent<Rigidbody>().angularVelocity);
-            this.gameObject.GetComponent<AudioSource>().Play();
+           
 
 
             if (other.gameObject.name.Equals("RightCube")){ // right hand
                 SteamVR_Input.__actions_default_out_Haptic.Execute(0, 0.7f, 50, 0.5f, SteamVR_Input_Sources.RightHand);
                 Debug.Log("collide RIGHT");
+                this.gameObject.GetComponent<AudioSource>().Play();
             }
-            else { // left hand ("LeftCube")
+            else if (other.gameObject.name.Equals("LeftCube")){ // left hand only in hammer mode
                 SteamVR_Input.__actions_default_out_Haptic.Execute(0, 0.7f, 50, 0.5f, SteamVR_Input_Sources.LeftHand); //delay Sec, Duration sec, freq 1-320 Hz, amplitude 0-1, Input Source
                 Debug.Log("LEFT collide");
+                this.gameObject.GetComponent<AudioSource>().Play();
             }
         }
     }
