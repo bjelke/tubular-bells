@@ -40,6 +40,14 @@
       "type": "boolean"
     },
     {
+      "name": "/actions/default/in/PickColor",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/TouchPosition",
+      "type": "vector2"
+    },
+    {
       "name": "/actions/default/out/Haptic",
       "type": "vibration"
     },
@@ -117,7 +125,10 @@
       "/actions/buggybuddy/in/Reset": "Reset",
       "/actions/platformer/in/Move": "Move",
       "/actions/platformer/in/Jump": "Jump",
-      "/actions/default/in/ToggleHammer": "ToggleHammer"
+      "/actions/default/in/ToggleHammer": "ToggleHammer",
+      "/actions/default/in/PickColor": "PickColor",
+      "/actions/default/in/TouchPos": "TouchPos",
+      "/actions/default/in/TouchPosition": "TouchPosition"
     }
   ]
 }

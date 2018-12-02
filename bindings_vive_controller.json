@@ -110,15 +110,6 @@
             {
                "inputs" : {
                   "click" : {
-                     "output" : "/actions/default/in/teleport"
-                  }
-               },
-               "mode" : "button",
-               "path" : "/user/hand/left/input/trackpad"
-            },
-            {
-               "inputs" : {
-                  "click" : {
                      "output" : "/actions/default/in/grabgrip"
                   }
                },
@@ -206,6 +197,18 @@
                },
                "mode" : "trigger",
                "path" : "/user/hand/right/input/trigger"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/pickcolor"
+                  },
+                  "position" : {
+                     "output" : "/actions/default/in/touchposition"
+                  }
+               },
+               "mode" : "trackpad",
+               "path" : "/user/hand/left/input/trackpad"
             }
          ]
       },
