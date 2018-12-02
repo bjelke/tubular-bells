@@ -8,10 +8,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 640f5aa82bb9c714696f842cb8727241, type: 3}
-  m_Name: __actions_default_in_Pose
+  m_Script: {fileID: 11500000, guid: 7c3d755cf6cc936488afcb037b69341e, type: 3}
+  m_Name: __actions_default_in_ToggleHammer
   m_EditorClassIdentifier: 
   changeTolerance: 0.000001
-  fullPath: /actions/default/in/Pose
+  fullPath: /actions/default/in/ToggleHammer
   actionSet: {fileID: 11400000, guid: c7bc678b69205474f8e4b68701bb347e, type: 2}
   direction: 0

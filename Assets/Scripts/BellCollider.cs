@@ -35,7 +35,7 @@ public class BellCollider : MonoBehaviour {
             //UnityEngine.Audio.AudioMixerGroup master = mixer.FindMatchingGroups("Master")[0];
 
             //this.gameObject.GetComponent<AudioSource>().volume = Mathf.Clamp01(other.gameObject.GetComponent<Rigidbody>().velocity.magnitude);
-            Debug.Log(other.gameObject.GetComponent<Rigidbody>().angularVelocity);
+            //Debug.Log(other.gameObject.GetComponent<Rigidbody>().angularVelocity);
            
 
 
