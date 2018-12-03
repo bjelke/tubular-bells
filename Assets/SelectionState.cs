@@ -14,9 +14,9 @@ public class SelectionState : MonoBehaviour {
 
     public SteamVR_Action_Boolean toggleHammer; // technically not needed
 
-    private Color blue = new Color(0,0,200);
-    private Color green = new Color(0, 200, 0);
-    private Color orange = new Color(200, 30, 0);
+    private Color blue = new Color(46, 130, 255)/255f;
+    private Color green = new Color(46, 255, 171)/255f;
+    private Color orange = new Color(255, 171, 46)/255f;
 
     // Use this for initialization
     void Start () {
@@ -55,21 +55,19 @@ public class SelectionState : MonoBehaviour {
                 SteamVR_Action_Vector2 trackpadPos = SteamVR_Input._default.inActions.TouchPosition;
                 Vector2 pos = trackpadPos.GetAxis(SteamVR_Input_Sources.LeftHand);
                 double angle = Mathf.Rad2Deg * (Mathf.Atan(pos.y / pos.x)); // might be something weird with negatives
-                Debug.Log(angle);
+                //Debug.Log(pos.x + ", " + pos.y + ", " + angle);
 
-                //OPTION 1: figure out color region based on angle
-                // OPTION 2: figure out color from texture (need to convert position)
-                if ((pos.x < 0 && pos.y < 0 && angle > 60) || (pos.x > 0 && pos.y > 0 && angle > 60)) // just to test if we can get input
+                if(pos.x < 0 && angle > -36 && angle < 90)
+                {
+                    testCube.gameObject.GetComponent<MeshRenderer>().material.color = orange;
+                } else if (pos.x > 0 && angle < 36 && angle > -90)
+                {
+                    testCube.gameObject.GetComponent<MeshRenderer>().material.color = green;
+                } else
                 {
                     testCube.gameObject.GetComponent<MeshRenderer>().material.color = blue;
                 }
-                else if (pos.x > 0 && pos.y < 0)
-                {
-                    testCube.gameObject.GetComponent<MeshRenderer>().material.color = green;
-                }
-                else {
-                    testCube.gameObject.GetComponent<MeshRenderer>().material.color = orange;
-                }
+
 
             }
         }
