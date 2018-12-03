@@ -24,9 +24,12 @@ public class BellCollider : MonoBehaviour {
     const float orangeTop = 1.293318f;
     const float orangeBottom = 1.152682f;
 
-    GameObject greenMarker;
-    GameObject blueMarker;
-    GameObject orangeMarker;
+    private GameObject greenMarker;
+    private GameObject blueMarker;
+    private GameObject orangeMarker;
+
+    private Material highlight;
+    private Material original;
 
     // Use this for initialization
     void Start () {
@@ -47,9 +50,12 @@ public class BellCollider : MonoBehaviour {
         orangeMarker.transform.parent = this.gameObject.transform;
         orangeMarker.SetActive(false);
 
-        Debug.Log("Green " + (greenMarker.gameObject.transform.position.y + greenMarker.gameObject.transform.localScale.y / 2) + " " + (greenMarker.gameObject.transform.position.y - greenMarker.gameObject.transform.localScale.y / 2));
-        Debug.Log("Blue " + (blueMarker.gameObject.transform.position.y + blueMarker.gameObject.transform.localScale.y / 2) + " " + (blueMarker.gameObject.transform.position.y - blueMarker.gameObject.transform.localScale.y / 2));
-        Debug.Log("Orange " + (orangeMarker.gameObject.transform.position.y + orangeMarker.gameObject.transform.localScale.y / 2) + " " + (orangeMarker.gameObject.transform.position.y - orangeMarker.gameObject.transform.localScale.y / 2));
+        highlight = new Material(Resources.Load("HighlightMat") as Material);
+        original = this.gameObject.GetComponent<MeshRenderer>().material;
+
+        //Debug.Log("Green " + (greenMarker.gameObject.transform.position.y + greenMarker.gameObject.transform.localScale.y / 2) + " " + (greenMarker.gameObject.transform.position.y - greenMarker.gameObject.transform.localScale.y / 2));
+        //Debug.Log("Blue " + (blueMarker.gameObject.transform.position.y + blueMarker.gameObject.transform.localScale.y / 2) + " " + (blueMarker.gameObject.transform.position.y - blueMarker.gameObject.transform.localScale.y / 2));
+        //Debug.Log("Orange " + (orangeMarker.gameObject.transform.position.y + orangeMarker.gameObject.transform.localScale.y / 2) + " " + (orangeMarker.gameObject.transform.position.y - orangeMarker.gameObject.transform.localScale.y / 2));
     }
 	
 	// Update is called once per frame
@@ -73,18 +79,31 @@ public class BellCollider : MonoBehaviour {
             //this.gameObject.GetComponent<AudioSource>().volume = Mathf.Clamp01(other.gameObject.GetComponent<Rigidbody>().velocity.magnitude);
             //Debug.Log(other.gameObject.GetComponent<Rigidbody>().angularVelocity);
 
-            if (other.gameObject.name.Equals("RightCube")){ // right hand
+            if (other.gameObject.name.Equals("RightCube"))
+            { // right hand
                 SteamVR_Input.__actions_default_out_Haptic.Execute(0, 0.7f, 50, 0.5f, SteamVR_Input_Sources.RightHand);
-                Debug.Log("collide RIGHT");
+                //Debug.Log("collide RIGHT");
                 //this.gameObject.GetComponent<AudioSource>().Play();
                 hitChime(other.gameObject, this.gameObject);
             }
-            else if (other.gameObject.name.Equals("LeftCube")){ // left hand only in hammer mode
+            else if (other.gameObject.name.Equals("LeftCube"))
+            { // left hand only in hammer mode
                 SteamVR_Input.__actions_default_out_Haptic.Execute(0, 0.7f, 50, 0.5f, SteamVR_Input_Sources.LeftHand); //delay Sec, Duration sec, freq 1-320 Hz, amplitude 0-1, Input Source
-                Debug.Log("LEFT collide");
+                //Debug.Log("LEFT collide");
                 //this.gameObject.GetComponent<AudioSource>().Play();
                 hitChime(other.gameObject, this.gameObject);
             }
+            else if (other.gameObject.name == "Controller (left)" && selection.selectionMode == true) {
+                this.gameObject.GetComponent <MeshRenderer>().material = highlight;
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.name == "Controller (left)")
+        {
+            this.gameObject.GetComponent<MeshRenderer>().material = original;
         }
     }
 

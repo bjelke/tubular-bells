@@ -32,6 +32,7 @@ public class GenerateChimes : MonoBehaviour {
             cylinder.AddComponent<AudioSource>();
 
             AudioClip note = Resources.Load<AudioClip>("ChimeNotes/spaceHarpsicord/"+soundFileNames[i]);
+            //AudioClip note = Resources.Load<AudioClip>("ChimeNotes/longChurchBells/" + soundFileNames[i]);
             cylinder.gameObject.GetComponent<AudioSource>().clip = note;
             cylinder.gameObject.GetComponent<AudioSource>().outputAudioMixerGroup = mixer.FindMatchingGroups("Master")[0];
 
@@ -50,7 +51,7 @@ public class GenerateChimes : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		//Material mat = new Material(Shad)
 	}
 
     public void PositionCylinders()
@@ -67,7 +68,7 @@ public class GenerateChimes : MonoBehaviour {
             int[] flats = { 2, 4, 7, 9, 11, 14, 16 };
             ArrayList sharps = new ArrayList(flats);
             if (sharps.Contains(chimeCount)){
-                cylinder.gameObject.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 200);
+                cylinder.gameObject.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 0);
             }
             
             //if (chimeCount < 11)
