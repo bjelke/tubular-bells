@@ -23,10 +23,11 @@ public class GenerateChimes : MonoBehaviour {
         for (int i = 0; i < 18; i++){
             GameObject cylinder = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
             cylinder.transform.parent = chimes.transform;
-            chimeLengths[i] = chimeLengths[i] / 39.7301f *2 / 4;
+            chimeLengths[i] = chimeLengths[i] / 39.7301f /2.5f;
+            chimeHeight[i] = chimeHeight[i] - 0.3f;
 
             cylinder.AddComponent<Rigidbody>();
-            cylinder.AddComponent<CapsuleCollider>();
+            //cylinder.AddComponent<CapsuleCollider>();
             cylinder.AddComponent<BellCollider>();
             cylinder.AddComponent<AudioSource>();
 

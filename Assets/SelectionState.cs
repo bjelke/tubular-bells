@@ -51,7 +51,7 @@ public class SelectionState : MonoBehaviour {
 
         if (SteamVR_Input._default.inActions.PickColor.GetStateDown(SteamVR_Input_Sources.LeftHand)) {
             if (selectionMode) { 
-                Debug.Log("Pressed Wheel");
+                //Debug.Log("Pressed Wheel");
                 SteamVR_Action_Vector2 trackpadPos = SteamVR_Input._default.inActions.TouchPosition;
                 Vector2 pos = trackpadPos.GetAxis(SteamVR_Input_Sources.LeftHand);
                 double angle = Mathf.Rad2Deg * (Mathf.Atan(pos.y / pos.x)); // might be something weird with negatives
