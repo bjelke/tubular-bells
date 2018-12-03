@@ -10,7 +10,7 @@ public class SelectionState : MonoBehaviour {
     public GameObject colorPicker;
     public GameObject controllerModel;
 
-    public GameObject testCube;
+    //public GameObject testCube;
 
     public SteamVR_Action_Boolean toggleHammer; // technically not needed
 
@@ -49,27 +49,27 @@ public class SelectionState : MonoBehaviour {
             }
         }
 
-        if (SteamVR_Input._default.inActions.PickColor.GetStateDown(SteamVR_Input_Sources.LeftHand)) {
-            if (selectionMode) { 
-                //Debug.Log("Pressed Wheel");
-                SteamVR_Action_Vector2 trackpadPos = SteamVR_Input._default.inActions.TouchPosition;
-                Vector2 pos = trackpadPos.GetAxis(SteamVR_Input_Sources.LeftHand);
-                double angle = Mathf.Rad2Deg * (Mathf.Atan(pos.y / pos.x)); // might be something weird with negatives
-                //Debug.Log(pos.x + ", " + pos.y + ", " + angle);
+        //if (SteamVR_Input._default.inActions.PickColor.GetStateDown(SteamVR_Input_Sources.LeftHand)) {
+        //    if (selectionMode) { 
+        //        //Debug.Log("Pressed Wheel");
+        //        SteamVR_Action_Vector2 trackpadPos = SteamVR_Input._default.inActions.TouchPosition;
+        //        Vector2 pos = trackpadPos.GetAxis(SteamVR_Input_Sources.LeftHand);
+        //        double angle = Mathf.Rad2Deg * (Mathf.Atan(pos.y / pos.x)); // might be something weird with negatives
+        //        //Debug.Log(pos.x + ", " + pos.y + ", " + angle);
 
-                if(pos.x < 0 && angle > -36 && angle < 90)
-                {
-                    testCube.gameObject.GetComponent<MeshRenderer>().material.color = orange;
-                } else if (pos.x > 0 && angle < 36 && angle > -90)
-                {
-                    testCube.gameObject.GetComponent<MeshRenderer>().material.color = green;
-                } else
-                {
-                    testCube.gameObject.GetComponent<MeshRenderer>().material.color = blue;
-                }
+        //        if(pos.x < 0 && angle > -36 && angle < 90)
+        //        {
+        //            testCube.gameObject.GetComponent<MeshRenderer>().material.color = orange;
+        //        } else if (pos.x > 0 && angle < 36 && angle > -90)
+        //        {
+        //            testCube.gameObject.GetComponent<MeshRenderer>().material.color = green;
+        //        } else
+        //        {
+        //            testCube.gameObject.GetComponent<MeshRenderer>().material.color = blue;
+        //        }
 
 
-            }
-        }
+        //    }
+        //}
 	}
 }
