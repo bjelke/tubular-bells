@@ -171,22 +171,26 @@ public class BellCollider : MonoBehaviour {
             foreach (GameObject go in blueGroup)
             {
                 go.GetComponent<AudioSource>().Play();
+                go.GetComponent<Animator>().SetTrigger("hitChime");
             }
         } else if (collisionPos.y > greenBottom && collisionPos.y < greenTop && greenMarker.activeSelf)
         {
             foreach (GameObject go in greenGroup)
             {
                 go.GetComponent<AudioSource>().Play();
+                go.GetComponent<Animator>().SetTrigger("hitChime");
             }
         } else if (collisionPos.y > orangeBottom && collisionPos.y < orangeTop && orangeMarker.activeSelf)
         {
             foreach (GameObject go in orangeGroup)
             {
                 go.GetComponent<AudioSource>().Play();
+                go.GetComponent<Animator>().SetTrigger("hitChime");
             }
         } else
         {
             chime.GetComponent<AudioSource>().Play();
+            chime.GetComponent<Animator>().SetTrigger("hitChime");
         }
     }
 }

@@ -30,11 +30,20 @@ public class GenerateChimes : MonoBehaviour {
             //cylinder.AddComponent<CapsuleCollider>();
             cylinder.AddComponent<BellCollider>();
             cylinder.AddComponent<AudioSource>();
+            cylinder.AddComponent<Animator>();
 
             AudioClip note = Resources.Load<AudioClip>("ChimeNotes/spaceHarpsicord/"+soundFileNames[i]);
             //AudioClip note = Resources.Load<AudioClip>("ChimeNotes/longChurchBells/" + soundFileNames[i]);
             cylinder.gameObject.GetComponent<AudioSource>().clip = note;
             cylinder.gameObject.GetComponent<AudioSource>().outputAudioMixerGroup = mixer.FindMatchingGroups("Master")[0];
+
+            AnimationClip vibrate = Resources.Load<AnimationClip>("vibrate");
+            //cylinder.gameObject.GetComponent<Animation>().AddClip(vibrate, "vibrate");
+            cylinder.gameObject.GetComponent<Animator>().applyRootMotion = true;
+            cylinder.gameObject.GetComponent<Animator>().runtimeAnimatorController = Resources.Load("chimeAnim") as RuntimeAnimatorController;
+           
+
+            //cylinder.gameObject.GetComponent<Animator>().applyRootMotion = true;
 
 
             cylinder.gameObject.GetComponent<CapsuleCollider>().transform.localScale = cylinder.gameObject.transform.localScale;
