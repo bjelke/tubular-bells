@@ -4,12 +4,15 @@ using UnityEngine;
 
 using Valve.VR;
 
-public class BellCollider : MonoBehaviour {
+public class BellCollider : MonoBehaviour
+{
     //private SteamVR_Controller.Device rightHand;
     //private SteamVR_Controller.Device leftHand;
 
     UnityEngine.Audio.AudioMixer mixer;
     public SelectionState selection;
+
+    private Animator anim;
 
     static ArrayList greenGroup = new ArrayList();
     static ArrayList blueGroup = new ArrayList();
@@ -30,11 +33,15 @@ public class BellCollider : MonoBehaviour {
 
     private Material highlight;
     private Material original;
+    private Vector3 targetPos;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         this.selection = GameObject.Find("Controller (left)").GetComponent<SelectionState>();
         mixer = Resources.Load("MasterMixer") as UnityEngine.Audio.AudioMixer;
+        anim = this.gameObject.GetComponent<Animator>();
+
         greenMarker = Instantiate(Resources.Load("GreenMarker") as GameObject);
         greenMarker.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, greenMarker.gameObject.transform.position.y, this.gameObject.transform.position.z);
         greenMarker.transform.parent = this.gameObject.transform;
@@ -52,16 +59,25 @@ public class BellCollider : MonoBehaviour {
 
         highlight = new Material(Resources.Load("HighlightMat") as Material);
         original = this.gameObject.GetComponent<MeshRenderer>().material;
+        targetPos = this.transform.position;
+
+        //Avatar chimeAvater = AvatarBuilder.BuildGenericAvatar(this.gameObject, "");
+
+        //anim.SetTarget(chimeAvater,targetPos);
 
         //Debug.Log("Green " + (greenMarker.gameObject.transform.position.y + greenMarker.gameObject.transform.localScale.y / 2) + " " + (greenMarker.gameObject.transform.position.y - greenMarker.gameObject.transform.localScale.y / 2));
         //Debug.Log("Blue " + (blueMarker.gameObject.transform.position.y + blueMarker.gameObject.transform.localScale.y / 2) + " " + (blueMarker.gameObject.transform.position.y - blueMarker.gameObject.transform.localScale.y / 2));
         //Debug.Log("Orange " + (orangeMarker.gameObject.transform.position.y + orangeMarker.gameObject.transform.localScale.y / 2) + " " + (orangeMarker.gameObject.transform.position.y - orangeMarker.gameObject.transform.localScale.y / 2));
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    // Update is called once per frame
+    void Update()
+    {
+        //if (anim.GetCurrentAnimatorStateInfo(0).IsName("Base"))
+        //{
+        //    anim.applyRootMotion = false;
+        //}
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -93,15 +109,16 @@ public class BellCollider : MonoBehaviour {
                 //this.gameObject.GetComponent<AudioSource>().Play();
                 hitChime(other.gameObject, this.gameObject);
             }
-            else if (other.gameObject.name == "Controller (left)" && selection.selectionMode == true) {
-                this.gameObject.GetComponent <MeshRenderer>().material = highlight;
+            else if (other.gameObject.name == "Controller (left)" && selection.selectionMode == true)
+            {
+                this.gameObject.GetComponent<MeshRenderer>().material = highlight;
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.gameObject.name == "Controller (left)")
+        if (other.gameObject.name == "Controller (left)")
         {
             this.gameObject.GetComponent<MeshRenderer>().material = original;
         }
@@ -127,7 +144,8 @@ public class BellCollider : MonoBehaviour {
                     {
                         orangeGroup.Remove(this.gameObject);
                         orangeMarker.SetActive(false);
-                    } else
+                    }
+                    else
                     {
                         orangeGroup.Add(this.gameObject);
                         orangeMarker.SetActive(true);
@@ -166,31 +184,37 @@ public class BellCollider : MonoBehaviour {
     private void hitChime(GameObject collider, GameObject chime)
     {
         Vector3 collisionPos = collider.gameObject.transform.position;
-        if(collisionPos.y > blueBottom && collisionPos.y < blueTop && blueMarker.activeSelf)
+        if (collisionPos.y > blueBottom && collisionPos.y < blueTop && blueMarker.activeSelf)
         {
             foreach (GameObject go in blueGroup)
             {
-                go.GetComponent<AudioSource>().Play();
-                go.GetComponent<Animator>().SetTrigger("hitChime");
+                playChime(go);
             }
-        } else if (collisionPos.y > greenBottom && collisionPos.y < greenTop && greenMarker.activeSelf)
+        }
+        else if (collisionPos.y > greenBottom && collisionPos.y < greenTop && greenMarker.activeSelf)
         {
             foreach (GameObject go in greenGroup)
             {
-                go.GetComponent<AudioSource>().Play();
-                go.GetComponent<Animator>().SetTrigger("hitChime");
+                playChime(go);
             }
-        } else if (collisionPos.y > orangeBottom && collisionPos.y < orangeTop && orangeMarker.activeSelf)
+        }
+        else if (collisionPos.y > orangeBottom && collisionPos.y < orangeTop && orangeMarker.activeSelf)
         {
             foreach (GameObject go in orangeGroup)
             {
-                go.GetComponent<AudioSource>().Play();
-                go.GetComponent<Animator>().SetTrigger("hitChime");
+                playChime(go);
             }
-        } else
-        {
-            chime.GetComponent<AudioSource>().Play();
-            chime.GetComponent<Animator>().SetTrigger("hitChime");
         }
+        else
+        {
+            playChime(chime);
+        }
+    }
+
+    private void playChime(GameObject chime)
+    {
+        chime.GetComponent<AudioSource>().Play();
+        //chime.gameObject.GetComponent<Animator>().applyRootMotion = true;
+        chime.GetComponent<Animator>().SetTrigger("hitChime");
     }
 }

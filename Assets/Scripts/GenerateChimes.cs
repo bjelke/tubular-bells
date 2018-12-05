@@ -20,31 +20,32 @@ public class GenerateChimes : MonoBehaviour {
         //Debug.Log(mixer.name);
 
         //convert chime lengths from inches to meters & create cylinder primitives.
-        for (int i = 0; i < 18; i++){
+        for (int i = 0; i < 18; i++)
+        {
             GameObject cylinder = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
             cylinder.transform.parent = chimes.transform;
-            chimeLengths[i] = chimeLengths[i] / 39.7301f /2.5f;
+            chimeLengths[i] = chimeLengths[i] / 39.7301f / 2.5f;
             chimeHeight[i] = chimeHeight[i] - 0.3f;
 
-            cylinder.AddComponent<Rigidbody>();
-            //cylinder.AddComponent<CapsuleCollider>();
-            cylinder.AddComponent<BellCollider>();
             cylinder.AddComponent<AudioSource>();
-            cylinder.AddComponent<Animator>();
-
-            AudioClip note = Resources.Load<AudioClip>("ChimeNotes/spaceHarpsicord/"+soundFileNames[i]);
+            AudioClip note = Resources.Load<AudioClip>("ChimeNotes/spaceHarpsicord/" + soundFileNames[i]);
             //AudioClip note = Resources.Load<AudioClip>("ChimeNotes/longChurchBells/" + soundFileNames[i]);
             cylinder.gameObject.GetComponent<AudioSource>().clip = note;
             cylinder.gameObject.GetComponent<AudioSource>().outputAudioMixerGroup = mixer.FindMatchingGroups("Master")[0];
+        }
 
-            AnimationClip vibrate = Resources.Load<AnimationClip>("vibrate");
-            //cylinder.gameObject.GetComponent<Animation>().AddClip(vibrate, "vibrate");
+        PositionCylinders();
+
+        foreach(Transform chime in chimes.transform) {
+            GameObject cylinder = chime.gameObject;
+            cylinder.AddComponent<Rigidbody>();
+            cylinder.AddComponent<BellCollider>();
+           
+            cylinder.AddComponent<Animator>();
+
             cylinder.gameObject.GetComponent<Animator>().applyRootMotion = true;
             cylinder.gameObject.GetComponent<Animator>().runtimeAnimatorController = Resources.Load("chimeAnim") as RuntimeAnimatorController;
            
-
-            //cylinder.gameObject.GetComponent<Animator>().applyRootMotion = true;
-
 
             cylinder.gameObject.GetComponent<CapsuleCollider>().transform.localScale = cylinder.gameObject.transform.localScale;
             cylinder.gameObject.GetComponent<CapsuleCollider>().transform.localPosition = cylinder.gameObject.transform.localPosition;
@@ -53,10 +54,7 @@ public class GenerateChimes : MonoBehaviour {
             cylinder.gameObject.GetComponent<Rigidbody>().isKinematic = true;
             cylinder.gameObject.GetComponent<Rigidbody>().useGravity = false;
         }
-
-       // GameObject.CreatePrimitive(PrimitiveType.Plane).transform.localPosition = new Vector3(0, 2f, 0);
-        PositionCylinders();
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -79,25 +77,9 @@ public class GenerateChimes : MonoBehaviour {
             if (sharps.Contains(chimeCount)){
                 cylinder.gameObject.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 0);
             }
+
             
-            //if (chimeCount < 11)
-            //{
-            //    cylinder.transform.localPosition = new Vector3(0 + chimeCount * 0.2f, 2f - chimeLengths[chimeCount], 0);
-            //}
-            //else if (chimeCount >= 16)
-            //{
-            //    cylinder.transform.localPosition = new Vector3(0.1f + (chimeCount - 8) * 0.2f, 2.1f - chimeLengths[chimeCount], 0);
-            //    cylinder.gameObject.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 200);
-            //} else if (chimeCount >= 13)
-            //{
-            //    cylinder.transform.localPosition = new Vector3(0.1f + (chimeCount - 9) * 0.2f, 2.1f - chimeLengths[chimeCount], 0);
-            //    cylinder.gameObject.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 200);
-            //}
-            //else
-            //{
-            //    cylinder.transform.localPosition = new Vector3(0.1f + (chimeCount-10) * 0.2f, 2.1f - chimeLengths[chimeCount], 0);
-            //    cylinder.gameObject.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 200);
-            //}
+
             chimeCount++;
         }
 
