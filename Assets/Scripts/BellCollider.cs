@@ -31,6 +31,11 @@ public class BellCollider : MonoBehaviour
     private GameObject blueMarker;
     private GameObject orangeMarker;
 
+    Gradient blueGrad;
+    Gradient greenGrad;
+    Gradient orangeGrad;
+    Gradient soloGrad;
+
     private Material highlight;
     private Material original;
     private Vector3 targetPos;
@@ -56,6 +61,17 @@ public class BellCollider : MonoBehaviour
         orangeMarker.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, orangeMarker.gameObject.transform.position.y, this.gameObject.transform.position.z);
         orangeMarker.transform.parent = this.gameObject.transform;
         orangeMarker.SetActive(false);
+
+        blueGrad = new Gradient();
+        orangeGrad = new Gradient();
+        greenGrad = new Gradient();
+        soloGrad = new Gradient();
+
+        blueGrad.SetKeys(new GradientColorKey[] { new GradientColorKey(new Color(46 / 255f, 130 / 255f, 1f), 0f), new GradientColorKey(Color.white, 1f) }, new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(0.0f, 1.0f)});
+        greenGrad.SetKeys(new GradientColorKey[] { new GradientColorKey(new Color(46/255f, 1f, 171/255f), 0f), new GradientColorKey(Color.white, 1f) }, new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(0.0f, 1.0f) });
+        orangeGrad.SetKeys(new GradientColorKey[] { new GradientColorKey(new Color(1f, 171/255f, 46/255f), 0f), new GradientColorKey(Color.white, 1f) }, new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(0.0f, 1.0f) });
+        soloGrad.SetKeys(new GradientColorKey[] { new GradientColorKey(Color.white, 0f), new GradientColorKey(Color.white, 1f) }, new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(0.0f, 1.0f) });
+
 
         highlight = new Material(Resources.Load("HighlightMat") as Material);
         original = this.gameObject.GetComponent<MeshRenderer>().material;
@@ -189,6 +205,11 @@ public class BellCollider : MonoBehaviour
             foreach (GameObject go in blueGroup)
             {
                 playChime(go);
+                ParticleSystem ps = go.GetComponentInChildren<ParticleSystem>();
+                var col = ps.colorOverLifetime;
+                col.color = blueGrad;
+                ps.Emit(30);
+                
             }
         }
         else if (collisionPos.y > greenBottom && collisionPos.y < greenTop && greenMarker.activeSelf)
@@ -196,6 +217,10 @@ public class BellCollider : MonoBehaviour
             foreach (GameObject go in greenGroup)
             {
                 playChime(go);
+                ParticleSystem ps = go.GetComponentInChildren<ParticleSystem>();
+                var col = ps.colorOverLifetime;
+                col.color = greenGrad;
+                ps.Emit(30);
             }
         }
         else if (collisionPos.y > orangeBottom && collisionPos.y < orangeTop && orangeMarker.activeSelf)
@@ -203,11 +228,19 @@ public class BellCollider : MonoBehaviour
             foreach (GameObject go in orangeGroup)
             {
                 playChime(go);
+                ParticleSystem ps = go.GetComponentInChildren<ParticleSystem>();
+                var col = ps.colorOverLifetime;
+                col.color = orangeGrad;
+                ps.Emit(30);
             }
         }
         else
         {
             playChime(chime);
+            ParticleSystem ps = chime.GetComponentInChildren<ParticleSystem>();
+            var col = ps.colorOverLifetime;
+            col.color = soloGrad;
+            ps.Emit(30);
         }
     }
 
@@ -215,6 +248,6 @@ public class BellCollider : MonoBehaviour
     {
         chime.GetComponent<AudioSource>().Play();
         //chime.gameObject.GetComponent<Animator>().applyRootMotion = true;
-        chime.GetComponent<Animator>().SetTrigger("hitChime");
+        //chime.GetComponent<Animator>().SetTrigger("hitChime");
     }
 }

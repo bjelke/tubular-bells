@@ -7,7 +7,9 @@ public class GenerateChimes : MonoBehaviour {
 
     public GameObject chimes;
 
-   
+    private GameObject particles;
+
+
     float[] chimeLengths = new float[18] {38f, 39f, 40f, 41.5f, 43f, 44f, 45.5f, 46.5f, 48.5f, 49.5f, 51.5f, 52.5f, 54.5f, 56f, 57.5f, 59.5f, 61f, 63f};
     float[] chimeHeight = new float[18] {2f, 2f, 2.1f, 2f, 2.1f, 2f, 2f, 2.1f, 2f, 2.1f, 2f, 2.1f, 2f, 2f, 2.1f, 2f, 2.1f, 2f};
     string[] soundFileNames = { "0F", "1E", "11Eflat", "2D", "12Csharp", "3C", "4B", "13Bflat", "5A", "14Aflat", "6G", "15Fsharp", "7lowF", "8lowE", "16lowEflat", "9lowD", "17lowCsharp", "10lowC"};
@@ -16,6 +18,7 @@ public class GenerateChimes : MonoBehaviour {
     // Use this for initialization
     void Start() {
         UnityEngine.Audio.AudioMixer mixer = Resources.Load("MasterMixer") as UnityEngine.Audio.AudioMixer;
+        particles = Resources.Load("particlePrefab") as GameObject;
 
         //Debug.Log(mixer.name);
 
@@ -40,11 +43,17 @@ public class GenerateChimes : MonoBehaviour {
             GameObject cylinder = chime.gameObject;
             cylinder.AddComponent<Rigidbody>();
             cylinder.AddComponent<BellCollider>();
-           
-            cylinder.AddComponent<Animator>();
 
-            cylinder.gameObject.GetComponent<Animator>().applyRootMotion = true;
-            cylinder.gameObject.GetComponent<Animator>().runtimeAnimatorController = Resources.Load("chimeAnim") as RuntimeAnimatorController;
+            GameObject cyParticles = Instantiate(particles, cylinder.transform.position, Quaternion.identity) as GameObject;
+            cyParticles.transform.parent = cylinder.transform;
+            cyParticles.transform.localScale = new Vector3(0.02f, 0.5f, 0.02f);
+
+
+           
+            //cylinder.AddComponent<Animator>();
+
+            //cylinder.gameObject.GetComponent<Animator>().applyRootMotion = true;
+            //cylinder.gameObject.GetComponent<Animator>().runtimeAnimatorController = Resources.Load("chimeAnim") as RuntimeAnimatorController;
            
 
             cylinder.gameObject.GetComponent<CapsuleCollider>().transform.localScale = cylinder.gameObject.transform.localScale;
