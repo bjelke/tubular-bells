@@ -75,7 +75,10 @@ public class GenerateChimes : MonoBehaviour {
             int[] flats = { 2, 4, 7, 9, 11, 14, 16 };
             ArrayList sharps = new ArrayList(flats);
             if (sharps.Contains(chimeCount)){
-                cylinder.gameObject.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 0);
+                cylinder.gameObject.GetComponent<MeshRenderer>().material = Resources.Load("[free] Brass common") as Material;
+            } else
+            {
+               cylinder.gameObject.GetComponent<MeshRenderer>().material = Resources.Load("silver") as Material;
             }
 
             
