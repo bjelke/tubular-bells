@@ -40,6 +40,8 @@ public class BellCollider : MonoBehaviour
     private Material original;
     private Vector3 targetPos;
 
+    public string noteName;
+
     // Use this for initialization
     void Start()
     {
@@ -128,6 +130,7 @@ public class BellCollider : MonoBehaviour
             else if (other.gameObject.name == "Controller (left)" && selection.selectionMode == true)
             {
                 this.gameObject.GetComponent<MeshRenderer>().material = highlight;
+                selection.text.text = noteName;
             }
         }
     }
@@ -137,6 +140,7 @@ public class BellCollider : MonoBehaviour
         if (other.gameObject.name == "Controller (left)")
         {
             this.gameObject.GetComponent<MeshRenderer>().material = original;
+            selection.text.text = "";
         }
     }
 
@@ -247,6 +251,7 @@ public class BellCollider : MonoBehaviour
     private void playChime(GameObject chime)
     {
         chime.GetComponent<AudioSource>().Play();
+       // Debug.Log(chime.GetComponent<AudioSource>().clip.name);
         //chime.gameObject.GetComponent<Animator>().applyRootMotion = true;
         //chime.GetComponent<Animator>().SetTrigger("hitChime");
     }

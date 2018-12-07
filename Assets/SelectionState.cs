@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
+using UnityEngine.UI;
 
 public class SelectionState : MonoBehaviour {
 
@@ -9,6 +10,7 @@ public class SelectionState : MonoBehaviour {
     public GameObject hammer;
     public GameObject colorPicker;
     public GameObject controllerModel;
+    public Text text;
 
     //public GameObject testCube;
 
