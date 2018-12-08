@@ -111,6 +111,9 @@
                "inputs" : {
                   "click" : {
                      "output" : "/actions/default/in/grabgrip"
+                  },
+                  "held" : {
+                     "output" : "/actions/default/in/dampen"
                   }
                },
                "mode" : "button",
@@ -170,6 +173,9 @@
                "inputs" : {
                   "click" : {
                      "output" : "/actions/default/in/grabgrip"
+                  },
+                  "held" : {
+                     "output" : "/actions/default/in/dampen"
                   }
                },
                "mode" : "button",
@@ -209,6 +215,24 @@
                },
                "mode" : "trackpad",
                "path" : "/user/hand/left/input/trackpad"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/togglefunmode"
+                  }
+               },
+               "mode" : "toggle_button",
+               "path" : "/user/hand/right/input/application_menu"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/togglefunmode"
+                  }
+               },
+               "mode" : "toggle_button",
+               "path" : "/user/hand/left/input/application_menu"
             }
          ]
       },

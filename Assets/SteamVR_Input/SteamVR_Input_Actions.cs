@@ -39,6 +39,10 @@ namespace Valve.VR
         
         public static SteamVR_Action_Vector2 __actions_default_in_TouchPosition;
         
+        public static SteamVR_Action_Boolean __actions_default_in_ToggleFunMode;
+        
+        public static SteamVR_Action_Boolean __actions_default_in_Dampen;
+        
         public static SteamVR_Action_Vibration __actions_default_out_Haptic;
         
         public static SteamVR_Action_Vector2 __actions_platformer_in_Move;
@@ -66,6 +70,8 @@ namespace Valve.VR
             SteamVR_Input.__actions_default_in_ToggleHammer.Initialize();
             SteamVR_Input.__actions_default_in_PickColor.Initialize();
             SteamVR_Input.__actions_default_in_TouchPosition.Initialize();
+            SteamVR_Input.__actions_default_in_ToggleFunMode.Initialize();
+            SteamVR_Input.__actions_default_in_Dampen.Initialize();
             SteamVR_Input.__actions_default_out_Haptic.Initialize();
             SteamVR_Input.__actions_platformer_in_Move.Initialize();
             SteamVR_Input.__actions_platformer_in_Jump.Initialize();
@@ -88,6 +94,8 @@ namespace Valve.VR
             Valve.VR.SteamVR_Input.__actions_default_in_ToggleHammer = ((SteamVR_Action_Boolean)(SteamVR_Input_References.GetAction("__actions_default_in_ToggleHammer")));
             Valve.VR.SteamVR_Input.__actions_default_in_PickColor = ((SteamVR_Action_Boolean)(SteamVR_Input_References.GetAction("__actions_default_in_PickColor")));
             Valve.VR.SteamVR_Input.__actions_default_in_TouchPosition = ((SteamVR_Action_Vector2)(SteamVR_Input_References.GetAction("__actions_default_in_TouchPosition")));
+            Valve.VR.SteamVR_Input.__actions_default_in_ToggleFunMode = ((SteamVR_Action_Boolean)(SteamVR_Input_References.GetAction("__actions_default_in_ToggleFunMode")));
+            Valve.VR.SteamVR_Input.__actions_default_in_Dampen = ((SteamVR_Action_Boolean)(SteamVR_Input_References.GetAction("__actions_default_in_Dampen")));
             Valve.VR.SteamVR_Input.__actions_default_out_Haptic = ((SteamVR_Action_Vibration)(SteamVR_Input_References.GetAction("__actions_default_out_Haptic")));
             Valve.VR.SteamVR_Input.__actions_platformer_in_Move = ((SteamVR_Action_Vector2)(SteamVR_Input_References.GetAction("__actions_platformer_in_Move")));
             Valve.VR.SteamVR_Input.__actions_platformer_in_Jump = ((SteamVR_Action_Boolean)(SteamVR_Input_References.GetAction("__actions_platformer_in_Jump")));
@@ -108,6 +116,8 @@ namespace Valve.VR
                     Valve.VR.SteamVR_Input.__actions_default_in_ToggleHammer,
                     Valve.VR.SteamVR_Input.__actions_default_in_PickColor,
                     Valve.VR.SteamVR_Input.__actions_default_in_TouchPosition,
+                    Valve.VR.SteamVR_Input.__actions_default_in_ToggleFunMode,
+                    Valve.VR.SteamVR_Input.__actions_default_in_Dampen,
                     Valve.VR.SteamVR_Input.__actions_default_out_Haptic,
                     Valve.VR.SteamVR_Input.__actions_platformer_in_Move,
                     Valve.VR.SteamVR_Input.__actions_platformer_in_Jump,
@@ -128,6 +138,8 @@ namespace Valve.VR
                     Valve.VR.SteamVR_Input.__actions_default_in_ToggleHammer,
                     Valve.VR.SteamVR_Input.__actions_default_in_PickColor,
                     Valve.VR.SteamVR_Input.__actions_default_in_TouchPosition,
+                    Valve.VR.SteamVR_Input.__actions_default_in_ToggleFunMode,
+                    Valve.VR.SteamVR_Input.__actions_default_in_Dampen,
                     Valve.VR.SteamVR_Input.__actions_platformer_in_Move,
                     Valve.VR.SteamVR_Input.__actions_platformer_in_Jump,
                     Valve.VR.SteamVR_Input.__actions_buggy_in_Steering,
@@ -151,6 +163,8 @@ namespace Valve.VR
                     Valve.VR.SteamVR_Input.__actions_default_in_GrabGrip,
                     Valve.VR.SteamVR_Input.__actions_default_in_ToggleHammer,
                     Valve.VR.SteamVR_Input.__actions_default_in_PickColor,
+                    Valve.VR.SteamVR_Input.__actions_default_in_ToggleFunMode,
+                    Valve.VR.SteamVR_Input.__actions_default_in_Dampen,
                     Valve.VR.SteamVR_Input.__actions_platformer_in_Jump,
                     Valve.VR.SteamVR_Input.__actions_buggy_in_Brake,
                     Valve.VR.SteamVR_Input.__actions_buggy_in_Reset};
@@ -178,6 +192,8 @@ namespace Valve.VR
                     Valve.VR.SteamVR_Input.__actions_default_in_ToggleHammer,
                     Valve.VR.SteamVR_Input.__actions_default_in_PickColor,
                     Valve.VR.SteamVR_Input.__actions_default_in_TouchPosition,
+                    Valve.VR.SteamVR_Input.__actions_default_in_ToggleFunMode,
+                    Valve.VR.SteamVR_Input.__actions_default_in_Dampen,
                     Valve.VR.SteamVR_Input.__actions_platformer_in_Move,
                     Valve.VR.SteamVR_Input.__actions_platformer_in_Jump,
                     Valve.VR.SteamVR_Input.__actions_buggy_in_Steering,

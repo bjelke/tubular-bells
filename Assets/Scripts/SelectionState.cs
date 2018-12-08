@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class SelectionState : MonoBehaviour {
 
     public bool selectionMode = true;
+    public bool visResponseMode = true;
+
+    AudioMixer mixer;
+
     public GameObject hammer;
     public GameObject colorPicker;
     public GameObject controllerModel;
     public Text text;
 
-    //public GameObject testCube;
-
-    public SteamVR_Action_Boolean toggleHammer; // technically not needed
 
     private Color blue = new Color(46, 130, 255)/255f;
     private Color green = new Color(46, 255, 171)/255f;
@@ -23,13 +25,17 @@ public class SelectionState : MonoBehaviour {
     // Use this for initialization
     void Start () {
         selectionMode = true;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+
+        mixer = Resources.Load("MasterMixer") as AudioMixer;
+
+    }
+
+    // Update is called once per frame
+    void Update () {
         // when trigger is pressed, change selection mode to false
         // turn off model and color picker, turn on hammer
         // if already false, do opposite
+
 
         if (SteamVR_Input._default.inActions.ToggleHammer.GetStateDown(SteamVR_Input_Sources.LeftHand)) {
             if (!selectionMode)
@@ -49,6 +55,28 @@ public class SelectionState : MonoBehaviour {
                 colorPicker.SetActive(false);
                 
             }
+        }
+
+        if (SteamVR_Input._default.inActions.ToggleFunMode.GetStateDown(SteamVR_Input_Sources.Any))
+        {
+            Debug.Log("toggle vis mode");
+            if (visResponseMode)
+            {
+                visResponseMode = false;
+            }
+            else
+            {
+                visResponseMode = true;
+            }
+        }
+
+        if (SteamVR_Input._default.inActions.Dampen.GetStateDown(SteamVR_Input_Sources.Any))
+        {
+            mixer.SetFloat("masterVolume", -10f);
+        }
+        else if (SteamVR_Input._default.inActions.Dampen.GetStateUp(SteamVR_Input_Sources.Any))
+        {
+            mixer.SetFloat("masterVolume", 0f);
         }
 
         //if (SteamVR_Input._default.inActions.PickColor.GetStateDown(SteamVR_Input_Sources.LeftHand)) {

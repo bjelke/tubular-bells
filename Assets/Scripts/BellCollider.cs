@@ -8,11 +8,8 @@ public class BellCollider : MonoBehaviour
 {
     //private SteamVR_Controller.Device rightHand;
     //private SteamVR_Controller.Device leftHand;
-
-    UnityEngine.Audio.AudioMixer mixer;
+    
     public SelectionState selection;
-
-    private Animator anim;
 
     static ArrayList greenGroup = new ArrayList();
     static ArrayList blueGroup = new ArrayList();
@@ -46,8 +43,6 @@ public class BellCollider : MonoBehaviour
     void Start()
     {
         this.selection = GameObject.Find("Controller (left)").GetComponent<SelectionState>();
-        mixer = Resources.Load("MasterMixer") as UnityEngine.Audio.AudioMixer;
-        anim = this.gameObject.GetComponent<Animator>();
 
         greenMarker = Instantiate(Resources.Load("GreenMarker") as GameObject);
         greenMarker.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, greenMarker.gameObject.transform.position.y, this.gameObject.transform.position.z);
@@ -79,10 +74,6 @@ public class BellCollider : MonoBehaviour
         original = this.gameObject.GetComponent<MeshRenderer>().material;
         targetPos = this.transform.position;
 
-        //Avatar chimeAvater = AvatarBuilder.BuildGenericAvatar(this.gameObject, "");
-
-        //anim.SetTarget(chimeAvater,targetPos);
-
         //Debug.Log("Green " + (greenMarker.gameObject.transform.position.y + greenMarker.gameObject.transform.localScale.y / 2) + " " + (greenMarker.gameObject.transform.position.y - greenMarker.gameObject.transform.localScale.y / 2));
         //Debug.Log("Blue " + (blueMarker.gameObject.transform.position.y + blueMarker.gameObject.transform.localScale.y / 2) + " " + (blueMarker.gameObject.transform.position.y - blueMarker.gameObject.transform.localScale.y / 2));
         //Debug.Log("Orange " + (orangeMarker.gameObject.transform.position.y + orangeMarker.gameObject.transform.localScale.y / 2) + " " + (orangeMarker.gameObject.transform.position.y - orangeMarker.gameObject.transform.localScale.y / 2));
@@ -91,10 +82,7 @@ public class BellCollider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (anim.GetCurrentAnimatorStateInfo(0).IsName("Base"))
-        //{
-        //    anim.applyRootMotion = false;
-        //}
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -106,25 +94,18 @@ public class BellCollider : MonoBehaviour
 
         if (other.gameObject.layer == LayerMask.NameToLayer("ControllerLayer"))
         {
-            //this.gameObject.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 200);
-
-            //UnityEngine.Audio.AudioMixerGroup master = mixer.FindMatchingGroups("Master")[0];
-
-            //this.gameObject.GetComponent<AudioSource>().volume = Mathf.Clamp01(other.gameObject.GetComponent<Rigidbody>().velocity.magnitude);
             //Debug.Log(other.gameObject.GetComponent<Rigidbody>().angularVelocity);
 
             if (other.gameObject.name.Equals("RightCube"))
             { // right hand
                 SteamVR_Input.__actions_default_out_Haptic.Execute(0, 0.7f, 50, 0.5f, SteamVR_Input_Sources.RightHand);
                 //Debug.Log("collide RIGHT");
-                //this.gameObject.GetComponent<AudioSource>().Play();
                 hitChime(other.gameObject, this.gameObject);
             }
             else if (other.gameObject.name.Equals("LeftCube"))
             { // left hand only in hammer mode
                 SteamVR_Input.__actions_default_out_Haptic.Execute(0, 0.7f, 50, 0.5f, SteamVR_Input_Sources.LeftHand); //delay Sec, Duration sec, freq 1-320 Hz, amplitude 0-1, Input Source
                 //Debug.Log("LEFT collide");
-                //this.gameObject.GetComponent<AudioSource>().Play();
                 hitChime(other.gameObject, this.gameObject);
             }
             else if (other.gameObject.name == "Controller (left)" && selection.selectionMode == true)
@@ -156,8 +137,9 @@ public class BellCollider : MonoBehaviour
                 Debug.Log("Pressed Wheel");
                 SteamVR_Action_Vector2 trackpadPos = SteamVR_Input._default.inActions.TouchPosition;
                 Vector2 pos = trackpadPos.GetAxis(SteamVR_Input_Sources.LeftHand);
-                double angle = Mathf.Rad2Deg * (Mathf.Atan(pos.y / pos.x)); // might be something weird with negatives
-                                                                            //Debug.Log(pos.x + ", " + pos.y + ", " + angle);
+                double angle = Mathf.Rad2Deg * (Mathf.Atan(pos.y / pos.x));
+                //Debug.Log(pos.x + ", " + pos.y + ", " + angle);
+
                 if (pos.x < 0 && angle > -36 && angle < 90) //orange
                 {
                     if (orangeMarker.activeSelf)
@@ -209,11 +191,10 @@ public class BellCollider : MonoBehaviour
             foreach (GameObject go in blueGroup)
             {
                 playChime(go);
-                ParticleSystem ps = go.GetComponentInChildren<ParticleSystem>();
-                var col = ps.colorOverLifetime;
-                col.color = blueGrad;
-                ps.Emit(30);
-                
+                if (selection.visResponseMode)
+                {
+                    playVisResponse(go, blueGrad);
+                }
             }
         }
         else if (collisionPos.y > greenBottom && collisionPos.y < greenTop && greenMarker.activeSelf)
@@ -221,10 +202,10 @@ public class BellCollider : MonoBehaviour
             foreach (GameObject go in greenGroup)
             {
                 playChime(go);
-                ParticleSystem ps = go.GetComponentInChildren<ParticleSystem>();
-                var col = ps.colorOverLifetime;
-                col.color = greenGrad;
-                ps.Emit(30);
+                if (selection.visResponseMode)
+                {
+                    playVisResponse(go, greenGrad);
+                }
             }
         }
         else if (collisionPos.y > orangeBottom && collisionPos.y < orangeTop && orangeMarker.activeSelf)
@@ -232,20 +213,28 @@ public class BellCollider : MonoBehaviour
             foreach (GameObject go in orangeGroup)
             {
                 playChime(go);
-                ParticleSystem ps = go.GetComponentInChildren<ParticleSystem>();
-                var col = ps.colorOverLifetime;
-                col.color = orangeGrad;
-                ps.Emit(30);
+                if (selection.visResponseMode)
+                {
+                    playVisResponse(go, orangeGrad);
+                }
             }
         }
         else
         {
             playChime(chime);
-            ParticleSystem ps = chime.GetComponentInChildren<ParticleSystem>();
-            var col = ps.colorOverLifetime;
-            col.color = soloGrad;
-            ps.Emit(30);
+            if (selection.visResponseMode)
+            {
+                playVisResponse(chime, soloGrad);
+            }
         }
+    }
+
+    private void playVisResponse(GameObject chime, Gradient grad)
+    {
+        ParticleSystem ps = chime.GetComponentInChildren<ParticleSystem>();
+        var col = ps.colorOverLifetime;
+        col.color = grad;
+        ps.Emit(30);
     }
 
     private void playChime(GameObject chime)

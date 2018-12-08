@@ -25,6 +25,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8a996a3442c4bb9419cd6faa6e4cae51, type: 2}
   - {fileID: 11400000, guid: bcd3d10b84d71ef4fab1057ba8891909, type: 2}
   - {fileID: 11400000, guid: f7d39832e772d20409328a4146d45318, type: 2}
+  - {fileID: 11400000, guid: 10e25145a3510b546927f979f67cdcc4, type: 2}
+  - {fileID: 11400000, guid: 8081beb9ba62ef7468057d761d2cdcbf, type: 2}
   InteractUI: {fileID: 11400000, guid: c9b1a742b099f8b4583770d4d96a2dec, type: 2}
   Teleport: {fileID: 11400000, guid: eaf5dc98a7fc2f84893eb67c3c391544, type: 2}
   GrabPinch: {fileID: 11400000, guid: 9d7b7a974a63db74c9a98412e2520c5b, type: 2}
@@ -36,3 +38,5 @@ MonoBehaviour:
   ToggleHammer: {fileID: 11400000, guid: 8a996a3442c4bb9419cd6faa6e4cae51, type: 2}
   PickColor: {fileID: 11400000, guid: bcd3d10b84d71ef4fab1057ba8891909, type: 2}
   TouchPosition: {fileID: 11400000, guid: f7d39832e772d20409328a4146d45318, type: 2}
+  ToggleFunMode: {fileID: 11400000, guid: 10e25145a3510b546927f979f67cdcc4, type: 2}
+  Dampen: {fileID: 11400000, guid: 8081beb9ba62ef7468057d761d2cdcbf, type: 2}

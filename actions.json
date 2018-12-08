@@ -48,6 +48,15 @@
       "type": "vector2"
     },
     {
+      "name": "/actions/default/in/ToggleFunMode",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/Dampen",
+      "type": "boolean",
+      "requirement": "mandatory"
+    },
+    {
       "name": "/actions/default/out/Haptic",
       "type": "vibration"
     },
@@ -128,7 +137,9 @@
       "/actions/default/in/ToggleHammer": "ToggleHammer",
       "/actions/default/in/PickColor": "PickColor",
       "/actions/default/in/TouchPos": "TouchPos",
-      "/actions/default/in/TouchPosition": "TouchPosition"
+      "/actions/default/in/TouchPosition": "TouchPosition",
+      "/actions/default/in/ToggleFunMode": "ToggleFunMode",
+      "/actions/default/in/Dampen": "Dampen"
     }
   ]
 }
