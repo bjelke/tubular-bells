@@ -5,8 +5,7 @@ in virtual reality using Unity, SteamVR, and the HTC Vive (headset and two stand
 ## How to Build and Run
 
 ## How to Play
-![Image of HTV Vive controller buttons]
-(./images/vive_controllers.jpg)
+![Image of HTC Vive controller buttons](./images/vive_controllers.jpg)
 This is a diagram of all the buttons on a Vive controller, as seen in the [Unity Manual](https://docs.unity3d.com/Manual/OpenVRControllers.html). Numbers below will correspond to buttons on this diagram to indicate the location of buttons on the controller.
 
 When the program begins, one of the controllers should be rendered as a hammer, and the other should look like a Vive controller. The trigger button on the back of the controller (7) that is rendered as a controller can toggle that hand to be a hammer or back to a controller.
@@ -25,6 +24,13 @@ You can toggle the particle effects and dampen the sound whether the controller 
 
 ## Overall Architecture
 This project was developed in Unity, so a lot of the structure was determined by the editor. The TubularBells scene has our  game objects and scripts acting together to run during play.
+
+The GenerateChimes script is attached to the "CylinderHolder" object, and it creates chime game objects from cylinders using measurements we took from real chimes, and attaches all the necessary assets to each chime, such as SoundClip objects for each note, different materials, colliders, instances of our BellCollider script, and particle generators.
+
+Each chime has its own instance of BellCollider, which handles intersections between hammers and controllers with the chimes. It also keeps track of chime groupings and the group markers for each chime. The BellCollider script has three static ArrayLists to keep track of the chimes in each group, and when a group marker is hit it plays the SoundClip of every chime in the list and triggers the visual particle effect in the group's color, if effect is enabled.
+
+The SelectionState script manages the rendering models and button input for the controller that can be changed into a hammer. It is referenced in BellCollider to know what effects certain collisions should have.
+
 ## Important Performance Issues
 Poor tracking the headset and controllers in the corners of the cave / HTC camera range can cause disorientation and dizziness in some users.
 
@@ -33,5 +39,5 @@ Dampening the sound of the chimes is currently not implemented to our satisfacti
 The capacity of particle effects is currently set to 500. It is difficult, but possible, to hit the capacity. No particle 
 effects will be rendered for a few seconds until some of them go out of range.
 
-We wrote the code with the intention of taking in button input to dampen sound and toggle the visual particle effects from both controllers. The SteamVR input handler recieves the signal from button presses on both controllers, but because the script that implements the effects is only attached to the "Controller (left)" game object, only that controller can execute those changes in practice.
+We wrote the code with the intention of taking in button input to dampen sound and toggle the visual particle effects from both controllers. The SteamVR input handler receives the signal from button presses on both controllers, but because the script that implements the effects is only attached to the "Controller (left)" game object, only that controller can execute those changes in practice.
 ## Results
