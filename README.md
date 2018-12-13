@@ -12,7 +12,7 @@ This is a diagram of all the buttons on a Vive controller, as seen in the [Unity
 
 When the program begins, one of the controllers should be rendered as a hammer, and the other should look like a Vive controller. The trigger button on the back of the controller (7) that is rendered as a controller can toggle that hand to be a hammer or back to a controller.
 
-When the hand is a controller, you can use it to group chimes together to play chords. This is also the hand that can turn the particle visualizations on and off and do sound dampening.
+When the hand is a controller, you can use it to group chimes together to play chords.
 
 Hit the chimes with the head of your hammer(s) to play a note. Each chime plays a different note, but the sound is not affected by where on the chime you hit, unless you hit the chime on an activated group marker. This will play all the chimes that have the same group marker.
 
@@ -20,9 +20,9 @@ When you have a controller, you can touch a chime with the controller and use th
 
 Use the small round menu button at the top of the controller (1) to toggle the visual particle response on or off.
 
-Use the side grip buttons (8) on the same controller to dampen sound.
+Use the side grip buttons (8) to dampen sound.
 
-You can toggle the particle effects and dampen the sound whether the controller appears as a controller or a hammer.
+You can toggle the particle effects and dampen the sound on either controller, whether the controller appears as a controller or a hammer.
 
 ## Overall Architecture
 This project was developed in Unity, so a lot of the structure was determined by the editor. The TubularBells scene has our  game objects and scripts acting together to run during play.
@@ -41,7 +41,7 @@ Dampening the sound of the chimes is currently not implemented to our satisfacti
 The capacity of particle effects is currently set to 500. It is difficult, but possible, to hit the capacity. No particle 
 effects will be rendered for a few seconds until some of them go out of range.
 
-We wrote the code with the intention of taking in button input to dampen sound and toggle the visual particle effects from both controllers. The SteamVR input handler receives the signal from button presses on both controllers, but because the script that implements the effects is only attached to the "Controller (left)" game object, only that controller can execute those changes in practice.
+There is a disconnect between the SteamVR input handler getting data from the menu button press and actually seeing the visual particle effects being turned on and off. We can get the effects to toggle on/off with both controllers, but you have to press the button fairly hard and sometimes it doesn't turn things off even though the input handler regiseters a change from true to false. Our best guess is that we made a mistake with that particular button mapping or the way it interacts with the OnButtonDown callbacks in the code. All other button presses work perfectly well.
 
 ## Results
 Our goals for this project were to make a musical instrument in virtual reality that could play notes and chords to form a song that would be easy to learn and fun to play. We also wanted our intstrument to reference a real world instrument, to give the user a sense of familliarity and bodily presence, but we wanted to make sure to fully utilize the "virtual" aspect of virtual reality and create an instrument that could never exist in real life. We achieved our goals.
