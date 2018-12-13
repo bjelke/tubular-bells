@@ -6,7 +6,7 @@ in virtual reality using Unity, SteamVR, and the HTC Vive (headset and two stand
 
 ## How to Play
 ![Image of HTV Vive controller buttons]
-(https://github.com/bjelke/tubular-bells/images/vive_controllers.jpg)
+(tubular-bells/images/vive_controllers.jpg)
 This is a diagram of all the buttons on a Vive controller, as seen in the [Unity Manual](https://docs.unity3d.com/Manual/OpenVRControllers.html). Numbers below will correspond to buttons on this diagram to indicate the location of buttons on the controller.
 
 When the program begins, one of the controllers should be rendered as a hammer, and the other should look like a Vive controller. The trigger button on the back of the controller (7) that is rendered as a controller can toggle that hand to be a hammer or back to a controller.
