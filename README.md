@@ -5,16 +5,21 @@ in virtual reality using Unity, SteamVR, and the HTC Vive (headset and two stand
 ## How to Build and Run
 
 ## How to Play
-When the program begins, one of the controllers should be rendered as a hammer, and the other should look like a Vive controller. The trigger button on the back of the controller that is rendered as a controller can toggle that hand to be a hammer or back to a controller.
+![Image of HTV Vive controller buttons]
+(https://docs.unity3d.com/uploads/Main/vive_controllers.jpg)
+This is a diagram of all the buttons on a Vive controller, as seen in the [Unity Manual](https://docs.unity3d.com/Manual/OpenVRControllers.html). Numbers below will correspond to buttons on this diagram to indicate the location of buttons on the controller.
+
+When the program begins, one of the controllers should be rendered as a hammer, and the other should look like a Vive controller. The trigger button on the back of the controller (7) that is rendered as a controller can toggle that hand to be a hammer or back to a controller.
 
 When the hand is a controller, you can use it to group chimes together to play chords. This is also the hand that can turn the particle visualizations on and off and do sound dampening.
 
 Hit the chimes with the head of your hammer(s) to play a note. Each chime plays a different note, but the sound is not affected by where on the chime you hit, unless you hit the chime on an activated group marker. This will play all the chimes that have the same group marker.
 
-When you have a controller, you can touch a chime with the controller and use the trackpad on the front of the controller to assign a group to the chime. You know you are touching the controller because it appears transparent with a pink outline. If you click a section of the trackpad that orange, green, or blue, the chime will be added to the group of that color and a marker will appear on the chime. Hit the marker with the head of your hammer(s) to play every chime in that group.
-Use the small round menu button at the top of the controller that can change to be a hammer or controller to toggle the visual particle response on or off.
+When you have a controller, you can touch a chime with the controller and use the trackpad on the front of the controller (2) to assign a group to the chime. You know you are touching the controller because it appears transparent with a pink outline. If you click a section of the trackpad that is orange, green, or blue, the chime will be added to the group of that color and a marker will appear on the chime. Hit the marker with the head of your hammer(s) to play every chime in that group.
 
-Use the side grip buttons on the same controller to dampen sound.
+Use the small round menu button at the top of the controller (1) to toggle the visual particle response on or off.
+
+Use the side grip buttons (8) on the same controller to dampen sound.
 
 You can toggle the particle effects and dampen the sound whether the controller appears as a controller or a hammer.
 
