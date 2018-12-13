@@ -2,10 +2,12 @@
 ### by Kayla Beckham & Brighten Jelke
 Inspired by the IEEE 3DUI contest from 2015, this project recreates orchestral chimes, also known as tubular bells, 
 in virtual reality using Unity, SteamVR, and the HTC Vive (headset and two standard controllers).
+
 ## How to Build and Run
 
 ## How to Play
 ![Image of HTC Vive controller buttons](./images/vive_controllers.jpg)
+
 This is a diagram of all the buttons on a Vive controller, as seen in the [Unity Manual](https://docs.unity3d.com/Manual/OpenVRControllers.html). Numbers below will correspond to buttons on this diagram to indicate the location of buttons on the controller.
 
 When the program begins, one of the controllers should be rendered as a hammer, and the other should look like a Vive controller. The trigger button on the back of the controller (7) that is rendered as a controller can toggle that hand to be a hammer or back to a controller.
@@ -40,4 +42,6 @@ The capacity of particle effects is currently set to 500. It is difficult, but p
 effects will be rendered for a few seconds until some of them go out of range.
 
 We wrote the code with the intention of taking in button input to dampen sound and toggle the visual particle effects from both controllers. The SteamVR input handler receives the signal from button presses on both controllers, but because the script that implements the effects is only attached to the "Controller (left)" game object, only that controller can execute those changes in practice.
+
 ## Results
+Our goals for this project were to make a musical instrument in virtual reality that could play notes and chords to form a song that would be easy to learn and fun to play. We also wanted our intstrument to reference a real world instrument, to give the user a sense of familliarity and bodily presence, but we wanted to make sure to fully utilize the "virtual" aspect of virtual reality and create an instrument that could never exist in real life. We achieved our goals.
