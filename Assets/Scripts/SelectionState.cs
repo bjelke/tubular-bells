@@ -7,36 +7,30 @@ using UnityEngine.Audio;
 
 public class SelectionState : MonoBehaviour {
 
-    public bool selectionMode = true;
-    public bool visResponseMode = true;
+    // This class handles most input from the Vive controllers and turns things on/off appropriately.
+    // It is attached to the left controller - button input might not always work from the right controller.
+    // There is a known bug with the top menu button / particle effect toggle not working consistently.
+    // Because of the way input from SteamVR works now, the button input could be remapped to correspond to different actions.
+    // The code would work the same way, but our comments refer to the default mapping we chose.
+
+    public bool selectionMode = true; // controller model and ability to select chimes
+    public bool visResponseMode = true; // particle effects
 
     AudioMixer mixer;
 
     public GameObject hammer;
     public GameObject colorPicker;
     public GameObject controllerModel;
-    public Text text;
-
-
-    private Color blue = new Color(46, 130, 255)/255f;
-    private Color green = new Color(46, 255, 171)/255f;
-    private Color orange = new Color(255, 171, 46)/255f;
+    public Text text; // This object is referenced by the other scripts during runtime, but it's set in the editor so we had to do it here.
 
     // Use this for initialization
     void Start () {
-        selectionMode = true;
-
         mixer = Resources.Load("MasterMixer") as AudioMixer;
-
     }
 
     // Update is called once per frame
     void Update () {
-        // when trigger is pressed, change selection mode to false
-        // turn off model and color picker, turn on hammer
-        // if already false, do opposite
-
-
+        // Toggle between hammer and chord color selection when left trigger is pressed
         if (SteamVR_Input._default.inActions.ToggleHammer.GetStateDown(SteamVR_Input_Sources.LeftHand)) {
             if (!selectionMode)
             {
@@ -52,24 +46,18 @@ public class SelectionState : MonoBehaviour {
              
                 hammer.SetActive(true);
                 controllerModel.SetActive(false);
-                colorPicker.SetActive(false);
-                
+                colorPicker.SetActive(false); 
             }
         }
 
+        // Toggle particle effects on and off with menu button on either controller. Default is on.
         if (SteamVR_Input._default.inActions.ToggleFunMode.GetStateDown(SteamVR_Input_Sources.Any))
         {
-            Debug.Log("toggle vis mode");
-            if (visResponseMode)
-            {
-                visResponseMode = false;
-            }
-            else
-            {
-                visResponseMode = true;
-            }
+            visResponseMode = visResponseMode ? false : true;
         }
 
+        // Press grip to lower volume while playing
+        //TODO: implement cooler dampening that reflects how sound works in the real world
         if (SteamVR_Input._default.inActions.Dampen.GetStateDown(SteamVR_Input_Sources.Any))
         {
             mixer.SetFloat("masterVolume", -10f);
@@ -78,28 +66,5 @@ public class SelectionState : MonoBehaviour {
         {
             mixer.SetFloat("masterVolume", 0f);
         }
-
-        //if (SteamVR_Input._default.inActions.PickColor.GetStateDown(SteamVR_Input_Sources.LeftHand)) {
-        //    if (selectionMode) { 
-        //        //Debug.Log("Pressed Wheel");
-        //        SteamVR_Action_Vector2 trackpadPos = SteamVR_Input._default.inActions.TouchPosition;
-        //        Vector2 pos = trackpadPos.GetAxis(SteamVR_Input_Sources.LeftHand);
-        //        double angle = Mathf.Rad2Deg * (Mathf.Atan(pos.y / pos.x)); // might be something weird with negatives
-        //        //Debug.Log(pos.x + ", " + pos.y + ", " + angle);
-
-        //        if(pos.x < 0 && angle > -36 && angle < 90)
-        //        {
-        //            testCube.gameObject.GetComponent<MeshRenderer>().material.color = orange;
-        //        } else if (pos.x > 0 && angle < 36 && angle > -90)
-        //        {
-        //            testCube.gameObject.GetComponent<MeshRenderer>().material.color = green;
-        //        } else
-        //        {
-        //            testCube.gameObject.GetComponent<MeshRenderer>().material.color = blue;
-        //        }
-
-
-        //    }
-        //}
 	}
 }
