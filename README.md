@@ -6,7 +6,7 @@ in virtual reality using Unity, SteamVR, and the HTC Vive (headset and two stand
 
 ## How to Play
 ![Image of HTV Vive controller buttons]
-(tubular-bells/images/vive_controllers.jpg)
+(./images/vive_controllers.jpg)
 This is a diagram of all the buttons on a Vive controller, as seen in the [Unity Manual](https://docs.unity3d.com/Manual/OpenVRControllers.html). Numbers below will correspond to buttons on this diagram to indicate the location of buttons on the controller.
 
 When the program begins, one of the controllers should be rendered as a hammer, and the other should look like a Vive controller. The trigger button on the back of the controller (7) that is rendered as a controller can toggle that hand to be a hammer or back to a controller.
@@ -26,7 +26,7 @@ You can toggle the particle effects and dampen the sound whether the controller 
 ## Overall Architecture
 This project was developed in Unity, so a lot of the structure was determined by the editor. The TubularBells scene has our  game objects and scripts acting together to run during play.
 ## Important Performance Issues
-Tracking the headset and controllers in the corners of the cave / HTC camera range.
+Poor tracking the headset and controllers in the corners of the cave / HTC camera range can cause disorientation and dizziness in some users.
 
 Dampening the sound of the chimes is currently not implemented to our satisfaction. When you press the dampening button, volume is turned down for the duration that you hold the button. It would be more realistic to make the sounds playing at the time of dampening quieter for the rest of the time that they are playing, or to stop them playing altogether by dampening them for long enough. Additionally, we would be happier if dampening could be mapped to a gesture instead of a button press, or if there was a way to dampen one chime at a time.
 ## Known Bugs
