@@ -4,7 +4,7 @@ Inspired by the IEEE 3DUI contest from 2015, this project recreates orchestral c
 in virtual reality using Unity, SteamVR, and the HTC Vive (headset and two standard controllers).
 
 ## How to Build and Run
-This project should be run straight from the Unity Editor. The name of the scene is "TubularBells" and it is stored in D:/student work/tubular bells/Assets/Scenes.
+This project should be run straight from the Unity Editor. The name of the scene is "TubularBells" and it is stored in D:/student work/tubular bells/Assets/Scenes. SteamVR should start up automatically when you click "play".
 
 ## How to Play
 ![Image of HTC Vive controller buttons](./images/vive_controllers.jpg)
