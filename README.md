@@ -25,7 +25,7 @@ Use the side grip buttons (8) to dampen sound. In the current implementation, th
 
 ## Demo
 
-![demo video](./images/demo.mov)
+![demo video](./images/demo.MOV)
 
 ## Overall Architecture
 This project was developed in Unity, so a lot of the structure was determined by the editor. The TubularBells scene has our  game objects and scripts acting together to run during play. Materials and models used came from the Unity Asset Store. The color selection image and sound files were created by us for this project.
