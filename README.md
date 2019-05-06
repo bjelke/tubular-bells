@@ -12,6 +12,8 @@ This is a diagram of all the buttons on a Vive controller, as seen in the [Unity
 
 When the program begins, one of the controllers should be rendered as a hammer, and the other should look like a Vive controller. The trigger button on the back of the controller (7) that is rendered as a controller can toggle that hand to be a hammer or back to a controller.
 
+![image of note name](./images/dec8.png)
+
 When the hand is a controller, you can use it to group chimes together to play chords.
 
 Hit the chimes with the head of your hammer(s) to play a note. Each chime plays a different note, but the sound is not affected by where on the chime you hit, unless you hit the chime on an activated group marker. This will play all the chimes that have the same group marker.
@@ -23,6 +25,10 @@ Use the small round menu button at the top of the controller (1) to toggle the v
 Use the side grip buttons (8) to dampen sound.
 
 You can toggle the particle effects and dampen the sound on either controller, whether the controller appears as a controller or a hammer.
+
+## Demo
+
+![demo video](./images/demo.mov)
 
 ## Overall Architecture
 This project was developed in Unity, so a lot of the structure was determined by the editor. The TubularBells scene has our  game objects and scripts acting together to run during play.
